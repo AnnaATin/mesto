@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./images/logo.svg" alt="Mesto logo">  
+    </header>
+    <main>
+        <section class="profile">
+            <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватар">
+            <div class="profile__info">
+                <div class="profile__block">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button type="button" class="profile__edit-button"></button>
+                </div>
+                <h2 class="profile__description">Исследователь океана</h2>
+            </div>
+            <button type="button" class="profile__add-button"></button>
+        </section>
+        <section class="elements">
+            <div class="elements__grid-item">
+                <img class="elements__grid-image" src="./images/AntarcticOcean.jpg" alt="Antarctic Ocean">
+                <div class="elements__grid-text-area">
+                    <p class="elements__grid-text">Antarctic Ocean</p>
+                    <button type="button" class="elements__like-button elements__like-button_active"></button>
+                </div>
+            </div>
+            <div class="elements__grid-item">
+                <img class="elements__grid-image" src="./images/ArcticOcean.jpg" alt="Arctic Ocean">
+                <div class="elements__grid-text-area">
+                    <p class="elements__grid-text">Arctic Ocean</p>
+                    <button type="button" class="elements__like-button elements__like-button_active"></button>
+                </div>
+            </div>
+            <div class="elements__grid-item">
+                <img class="elements__grid-image" src="./images/IndianOcean.jpg" alt="Indian Ocean">
+                <div class="elements__grid-text-area">
+                    <p class="elements__grid-text">Indian Ocean</p>
+                    <button type="button" class="elements__like-button elements__like-button_active"></button>
+                </div>
+            </div>
+            <div class="elements__grid-item">
+                <img class="elements__grid-image" src="./images/NorthAtlanticOcean.jpg" alt="North Atlantic Ocean">
+                <div class="elements__grid-text-area">
+                    <p class="elements__grid-text">North Atlantic Ocean</p>
+                    <button type="button" class="elements__like-button elements__like-button_active"></button>
+                </div>
+            </div>
+            <div class="elements__grid-item">
+                <img class="elements__grid-image" src="./images/SouthAtlanticOcean.jpg" alt="South Atlantic Ocean">
+                <div class="elements__grid-text-area">
+                    <p class="elements__grid-text">South Atlantic Ocean</p>
+                    <button type="button" class="elements__like-button elements__like-button_active"></button>
+                </div>
+            </div>
+            <div class="elements__grid-item">
+                <img class="elements__grid-image" src="./images/PacificOcean.jpg" alt="Pacific Ocean">
+                <div class="elements__grid-text-area">
+                    <p class="elements__grid-text">Pacific Ocean</p>
+                    <button type="button" class="elements__like-button elements__like-button_active"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">© 2023. AT</p>
+    </footer>
+    <section class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close-button"></button>
+            <form action="#" name="profile-edit" class="form">
+                <label class="popup__label">Редактировать профиль</label>
+                <input type="text" name="name" class="popup__form popup__input-name" id="name">
+                <input type="text" name="description" class="popup__form popup__input-description" id="description">
+                <button type="submit" class="popup__save-button">Сохранить</button>
+            </form>
+        </div>  
+    </section>
+    <script src="./scripts/index.js"></script>
+</body>
+</html>

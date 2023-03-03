@@ -1,0 +1,23 @@
+.popup__label {
+    margin: 0;
+    padding-left: 36px;
+    padding-top: 34px;
+    padding-bottom: 54px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 900;
+    color: black;
+    line-height: 29px;
+    max-width: calc(100% - 28px);
+}
+@media (max-width: 475px) {
+    .popup__label {
+        padding-left: 0;
+        align-self: center;
+        font-size: 18px;
+        line-height: 22px;
+        max-width: 238px;
+        padding-bottom: 75px;
+    }
+}
