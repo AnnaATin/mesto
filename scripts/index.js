@@ -1,6 +1,5 @@
 let profileEditButtonElement = document.querySelector('.profile__edit-button');
 let popupElement = document.querySelector('.popup');
-let popupSaveButtonElement = popupElement.querySelector('.popup__save-button');
 let popupCloseButtonElement = popupElement.querySelector('.popup__close-button');
 
 const togglePopupVisibility = function (){
@@ -9,6 +8,8 @@ const togglePopupVisibility = function (){
 profileEditButtonElement.addEventListener("click", togglePopupVisibility);
 
 const openPopup = function (){
+    inputNameElement.value = profileNameElement.textContent;
+    inputDescriptionElement.value = profileDescriptionElement.textContent;
     popupElement.classList.add("popup_opened");
 };
 
@@ -18,26 +19,17 @@ const closePopup = function (){
 profileEditButtonElement.addEventListener('click', openPopup);
 popupCloseButtonElement.addEventListener('click', closePopup);
 
-let formElement = document.querySelector('.form');
+let formElement = document.querySelector('.popup__form');
 let profileNameElement = document.querySelector('.profile__name');
 let profileDescriptionElement = document.querySelector('.profile__description');
 let inputNameElement = document.querySelector('#name');
 let inputDescriptionElement = document.querySelector('#description');
 
-let defaultNameTextElement = profileNameElement.textContent;
-inputNameElement.value = defaultNameTextElement;
-
-let defaultDescriptionTextElement = profileDescriptionElement.textContent;
-inputDescriptionElement.value = defaultDescriptionTextElement;
-
 function handleFormElementSubmit (evt) {
     evt.preventDefault();
 
-    let inputNameTextElement = inputNameElement.value;
-    let inputDescriptionTextElement = inputDescriptionElement.value;
-
-    profileNameElement.textContent = inputNameTextElement;
-    profileDescriptionElement.textContent = inputDescriptionTextElement;
+    profileNameElement.textContent = inputNameElement.value; 
+    profileDescriptionElement.textContent = inputDescriptionElement.value;
 
     closePopup();
 }
