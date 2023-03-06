@@ -2,11 +2,6 @@ let profileEditButtonElement = document.querySelector('.profile__edit-button');
 let popupElement = document.querySelector('.popup');
 let popupCloseButtonElement = popupElement.querySelector('.popup__close-button');
 
-const togglePopupVisibility = function (){
-    popupElement.classList.toggle("popup_opened");
-};
-profileEditButtonElement.addEventListener("click", togglePopupVisibility);
-
 const openPopup = function (){
     inputNameElement.value = profileNameElement.textContent;
     inputDescriptionElement.value = profileDescriptionElement.textContent;
@@ -28,7 +23,7 @@ let inputDescriptionElement = document.querySelector('#description');
 function handleFormElementSubmit (evt) {
     evt.preventDefault();
 
-    profileNameElement.textContent = inputNameElement.value; 
+    profileNameElement.textContent = inputNameElement.value;
     profileDescriptionElement.textContent = inputDescriptionElement.value;
 
     closePopup();
