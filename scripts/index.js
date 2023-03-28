@@ -11,6 +11,9 @@ const inputDescriptionElement = document.querySelector('#description');
 const inputPlaceNameElement = document.querySelector('#placename');
 const inputImgLinkElement = document.querySelector('#imglink');
 
+const popups = document.querySelectorAll('.popup');
+
+
 //Добавляем popup_opened к любому popup
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -34,9 +37,25 @@ profileAddButtonElement.addEventListener('click', openPopupPLaceAdd);
 
 
 //Убираем popup_opened у popup
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-}
+function closePopup() {
+  document.querySelector('.popup_opened').classList.remove('popup_opened');
+};
+
+//ПР6 3. Закрытие попапа кликом на оверлей
+const closePopupOverlay = (evt) => {
+  if (evt.target !== evt.currentTarget) return;
+  closePopup();
+};
+popups.forEach((popup) => popup.addEventListener('click', closePopupOverlay));
+
+//ПР6 4. Закрытие попапа нажатием на Esc
+document.addEventListener('keydown', function(evt) {
+  const key = evt.key;
+  if (key === "Escape") {
+    closePopup();
+  }
+});
+
 //Устанавливаем обработчик закрытия на крестик
 const closeButtons = document.querySelectorAll('.popup__close-button');
 closeButtons.forEach((button) => {
