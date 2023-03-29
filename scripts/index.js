@@ -17,6 +17,7 @@ const popups = document.querySelectorAll('.popup');
 //Добавляем popup_opened к любому popup
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEsc);
 };
 
 //Заполняем popup с Profile inf перед открытием
@@ -37,24 +38,26 @@ profileAddButtonElement.addEventListener('click', openPopupPLaceAdd);
 
 
 //Убираем popup_opened у popup
-function closePopup() {
-  document.querySelector('.popup_opened').classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.addEventListener('keydown', closeByEsc);
 };
 
 //ПР6 3. Закрытие попапа кликом на оверлей
 const closePopupOverlay = (evt) => {
   if (evt.target !== evt.currentTarget) return;
-  closePopup();
+  closePopup(evt.target);
 };
 popups.forEach((popup) => popup.addEventListener('click', closePopupOverlay));
 
+
 //ПР6 4. Закрытие попапа нажатием на Esc
-document.addEventListener('keydown', function(evt) {
-  const key = evt.key;
-  if (key === "Escape") {
-    closePopup();
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
-});
+}
 
 //Устанавливаем обработчик закрытия на крестик
 const closeButtons = document.querySelectorAll('.popup__close-button');
@@ -149,6 +152,8 @@ function handleCardFormSubmit (evt) {
   elementsList.prepend(initialCardElement);
   inputPlaceNameElement.value = '';
   inputImgLinkElement.value = '';
+  evt.submitter.classList.add('popup__save-button_inactive')
+  evt.submitter.disabled = true;
   closePopup(popupPlaceEditElement);
 };
 popupPlaceEditElement.addEventListener('submit', handleCardFormSubmit);

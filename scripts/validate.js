@@ -4,6 +4,7 @@ const validationRule = {
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_inactive',
   inputErrorClass: 'popup__input_error',
+  errorClass: 'ppopup__input-error_active'
 };
 
 
@@ -11,13 +12,13 @@ const showInputError = (formElement, inputElement, errorMessage, validationRule)
   const errorElement = formElement.querySelector(`.${inputElement.id}-input-error`);
   inputElement.classList.add(validationRule.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
+  errorElement.classList.add(validationRule.errorClass);
 };
 
 const hideInputError = (formElement, inputElement, validationRule) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-input-error`);
   inputElement.classList.remove(validationRule.inputErrorClass);
-  errorElement.classList.remove('popup__input-error_active');
+  errorElement.classList.remove(validationRule.errorClass);
   errorElement.textContent = ' '
 };
 
@@ -62,9 +63,6 @@ function setEventListeners(formElement, validationRule){
 function enableValidation (validationRule){
   const formList = Array.from(document.querySelectorAll(validationRule.formSelector));
   formList.forEach((formElement) => {
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-  });
     setEventListeners(formElement, validationRule);
 });
 };

@@ -10,4 +10,5 @@
   position: relative;
   align-self: center;
   width: 358px;
+  min-height: 30px;
 }
