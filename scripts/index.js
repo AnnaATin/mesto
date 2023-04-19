@@ -1,3 +1,8 @@
+import Card from './Card.js'
+import FormValidator from './FormValidator.js'
+import validationRule from './validate.js'
+import initialCards from './initialCards.js'
+
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
 const popupProfileEditElement = document.querySelector('.popup_profile-edit');
 const profileAddButtonElement = document.querySelector('.profile__add-button');
@@ -76,80 +81,37 @@ function handleProfileFormSubmit (evt) {
 popupProfileEditElement.addEventListener('submit', handleProfileFormSubmit);
 
 
-//1. Шесть карточек «из коробки»
+
 const elementsList = document.querySelector('.elements');
-const initialCardsTemplate = document.querySelector('#elements-template').content;
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-//4. Лайк карточки
-const activateLikeButton = (evt) => {
-  evt.target.classList.toggle('elements__like-button_active');
-};
-
-//5. Удаление карточки
-const removeCard = (evt) => {
-  const chosenCard = evt.target.closest('.elements__grid-item');
-  chosenCard.remove();
-};
-
 const popupImgContainer = document.getElementById("popup_open-image");
 const modalImg = document.getElementById("popup__image");
 const captionText = document.getElementById("popup__caption");
 //6. Открытие попапа с картинкой
-const openPopupImg = (name, link) => {
+function openPopupImg(link, name){
   modalImg.src = link;
   modalImg.alt = name;
   captionText.textContent = name;
   openPopup(popupImgContainer);
 };
 
-//Создание каждой карточки с картинкой
-function createCard(item) {
-  const initialCardElement = initialCardsTemplate.cloneNode(true);
-  const cardImg = initialCardElement.querySelector('.elements__grid-image');
-  const cardText = initialCardElement.querySelector('.elements__grid-text');
-  cardImg.src = item.link;
-  cardImg.alt = item.name;
-  cardText.textContent = item.name;
-  cardImg.addEventListener('click', () => openPopupImg(item.name, item.link));
-  const removeButton = initialCardElement.querySelector('.elements__remove-button');
-  removeButton.addEventListener('click', removeCard);
-  const likeButton = initialCardElement.querySelector('.elements__like-button');
-  likeButton.addEventListener('click', activateLikeButton);
-  return initialCardElement;
+//Создание карточки с картинкой
+const createCard = (name, link) => {
+  const cardElementTemplate = new Card({name, link}, '#elements-template', openPopupImg);
+  const cardElement = cardElementTemplate.createCard();
+  return cardElement;
 }
+
+const prependCard = ({ name, link }) => {
+  const cardElementTemplate = createCard(name, link)
+  elementsList.prepend(cardElementTemplate)
+}
+initialCards.forEach(prependCard)
 
 //3. Добавление карточки
 function handleCardFormSubmit (evt) {
   evt.preventDefault();
-  const element = {name: inputPlaceNameElement.value, link: inputImgLinkElement.value}
-  const initialCardElement = createCard(element)
-  elementsList.prepend(initialCardElement);
+  const dataCard = {name: inputPlaceNameElement.value, link: inputImgLinkElement.value};
+  prependCard(dataCard);
   inputPlaceNameElement.value = '';
   inputImgLinkElement.value = '';
   evt.submitter.classList.add('popup__save-button_inactive')
@@ -158,9 +120,17 @@ function handleCardFormSubmit (evt) {
 };
 popupPlaceEditElement.addEventListener('submit', handleCardFormSubmit);
 
+const formValidators = {};
 
-//Вывод всего массива сразу
-initialCards.forEach(function (element) {
-  const initialCardElement = createCard(element)
-  elementsList.append(initialCardElement);
-});
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(settings, formElement);
+    const { name } = formElement;
+    formValidators[name] = validator;
+    validator.enableValidation();
+  });
+}
+
+enableValidation(validationRule);
