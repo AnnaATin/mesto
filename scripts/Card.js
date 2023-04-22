@@ -9,6 +9,7 @@ class Card{
   _createTemplate(){
     const cardElement = document
     .querySelector(this._templateSelector).content
+    .querySelector('.elements__grid-item')
     .cloneNode(true)
 
     return cardElement
@@ -29,26 +30,28 @@ class Card{
     this._addEventListeners();
 
     return this._cardElement;
+
   }
 
   _handleOpenPopupImg = (evt) => {
     this._openPopupImg(this._link, this._name);
   }
 
-  _handleRemove(evt){
-    evt.target.closest('.elements__grid-item').remove();
+  _handleRemove () {
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 
-  _handleLike(evt){
-    evt.target.classList.toggle('elements__like-button_active');
+  _handleLike() {
+    this._likeButton.classList.toggle('elements__like-button_active');
   }
 
   _addEventListeners(){
     this._cardImg.addEventListener('click', this._handleOpenPopupImg);
 
-    this._removeButton.addEventListener('click', this._handleRemove);
+    this._removeButton.addEventListener('click', () => this._handleRemove());
 
-    this._likeButton.addEventListener('click', this._handleLike);
+    this._likeButton.addEventListener('click', () => this._handleLike())
   }
 
 }

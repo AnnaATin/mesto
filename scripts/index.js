@@ -114,23 +114,24 @@ function handleCardFormSubmit (evt) {
   prependCard(dataCard);
   inputPlaceNameElement.value = '';
   inputImgLinkElement.value = '';
-  evt.submitter.classList.add('popup__save-button_inactive')
-  evt.submitter.disabled = true;
+  validation(validationRule);
   closePopup(popupPlaceEditElement);
 };
 popupPlaceEditElement.addEventListener('submit', handleCardFormSubmit);
 
+
 const formValidators = {};
 
-const enableValidation = (settings) => {
+const validation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
-
   formList.forEach((formElement) => {
     const validator = new FormValidator(settings, formElement);
     const { name } = formElement;
     formValidators[name] = validator;
     validator.enableValidation();
+    validator.disableSubmitButton();
   });
 }
 
-enableValidation(validationRule);
+validation(validationRule);
+
