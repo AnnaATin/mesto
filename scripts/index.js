@@ -7,8 +7,6 @@ const profileEditButtonElement = document.querySelector('.profile__edit-button')
 const popupProfileEditElement = document.querySelector('.popup_profile-edit');
 const profileAddButtonElement = document.querySelector('.profile__add-button');
 const popupPlaceEditElement = document.querySelector('.popup_place-edit');
-const placeEdit = document.forms['placeEdit'];
-const profileEdit = document.forms['profileEdit'];
 
 const profileNameElement = document.querySelector('.profile__name');
 const profileDescriptionElement = document.querySelector('.profile__description');
@@ -31,7 +29,6 @@ const openPopup = (popup) => {
 const openPopupProfileEdit = () => {
   inputNameElement.value = profileNameElement.textContent;
   inputDescriptionElement.value = profileDescriptionElement.textContent;
-  formValidators[profileEdit.name].resetValidation();
   openPopup(popupProfileEditElement);
 };
 //Открываем popup с Profile inf
@@ -39,7 +36,6 @@ profileEditButtonElement.addEventListener('click', openPopupProfileEdit);
 
 //2. Форма добавления карточки
 const openPopupPLaceAdd = () => {
-  formValidators[placeEdit.name].resetValidation();
   openPopup(popupPlaceEditElement);
 };
 //Открываем popup с Place inf
@@ -102,7 +98,6 @@ function openPopupImg(link, name){
 const createCard = (name, link) => {
   const cardElementTemplate = new Card({name, link}, '#elements-template', openPopupImg);
   const cardElement = cardElementTemplate.createCard();
-
   return cardElement;
 }
 
@@ -119,7 +114,7 @@ function handleCardFormSubmit (evt) {
   prependCard(dataCard);
   inputPlaceNameElement.value = '';
   inputImgLinkElement.value = '';
-  formValidators[placeEdit.name].resetValidation();
+  validation(validationRule);
   closePopup(popupPlaceEditElement);
 };
 popupPlaceEditElement.addEventListener('submit', handleCardFormSubmit);
@@ -134,6 +129,7 @@ const validation = (settings) => {
     const { name } = formElement;
     formValidators[name] = validator;
     validator.enableValidation();
+    validator.disableSubmitButton();
   });
 }
 
