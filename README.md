@@ -2,7 +2,7 @@
 Реализована возможность изменения имени профиля и описания, открытие и закрытие формы по клику на определенные элементы, валидация форм при вводе данных, возможность ставить лайки и удалять фото, возможность добавлять собственные фото после заполнения формы. Созданы классы Card, FormValidator, Section, Popup, PopupWithImage, PopupWithForm, UserInfo.
 Собрано Webpack.
 
-https://annaatin.github.io/mesto/
+https://annaatin.github.io/mesto/ - not work yet
 
 **Интро**
 
