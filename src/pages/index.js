@@ -104,7 +104,6 @@ profileAddButtonElement.addEventListener('click', () => {
 
 
 const formValidators = {};
-
 const validation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
