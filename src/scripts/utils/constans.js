@@ -1,3 +1,19 @@
+const placeEdit = document.forms['placeEdit'];
+const profileEdit = document.forms['profileEdit'];
+const profileNameSelector = '.profile__name';
+const profileAboutSelector = '.profile__description';
+
+const validationRule = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
+  inputErrorClass: '.popup__input_error',
+}
+
+const profileEditButtonElement = document.querySelector('.profile__edit-button');
+const profileAddButtonElement = document.querySelector('.profile__add-button');
+
 const initialCards = [
   {
     name: 'Байкал',
@@ -25,4 +41,13 @@ const initialCards = [
   }
 ];
 
-export default initialCards
+export{
+   initialCards,
+   placeEdit,
+   profileEdit,
+   profileNameSelector,
+   profileAboutSelector,
+   validationRule,
+   profileEditButtonElement,
+   profileAddButtonElement,
+}
