@@ -11,11 +11,15 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__block/profile__block.css);
+@import url(../blocks/profile/__avatar-edit-button/profile__avatar-edit-button.css);
+@import url(../blocks/profile/__avatar-container/profile__avatar-container.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__grid-item/elements__grid-item.css);
 @import url(../blocks/elements/__grid-text-area/elements__grid-text-area.css);
 @import url(../blocks/elements/__grid-text/elements__grid-text.css);
 @import url(../blocks/elements/__like-button/elements__like-button.css);
+@import url(../blocks/elements/__like-count/elements__like-count.css);
+@import url(../blocks/elements/__like-area/elements__like-area.css);
 @import url(../blocks/elements/__like-button/_active/elements__like-button_active.css);
 @import url(../blocks/elements/__grid-image/elements__grid-image.css);
 @import url(../blocks/elements/__remove-button/elements__remove-button.css);
