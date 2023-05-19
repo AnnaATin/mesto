@@ -62,7 +62,6 @@ const popupAvatarEdit = new PopupWithForm(
   api.handleUserAvatar(newValues)
     .then((data) => {
       userInfo.setUserInfo(data)
-      formValidators[avatarEdit.name].resetValidation()
       popupAvatarEdit.close()
     })
     .catch((err) => console.log(err))
@@ -77,9 +76,7 @@ const popupPlaceEdit = new PopupWithForm(
   api.addCard(newValues)
     .then((data) => {
       const card = createCard(data)
-      const cardElement = card.renderCard()
-      initialCardList.addItem(cardElement)
-      formValidators[placeEdit.name].resetValidation();
+      initialCardList.addItem(card)
       popupPlaceEdit.close()
     })
     .catch((err) => console.log(err))
@@ -116,15 +113,16 @@ const createCard = (data) => {
   },
   templateSelector, api, userId
   )
-  return card
+  const cardElement = card.renderCard()
+  return cardElement
+
 }
 
 //Создание секции с карточкой
 const initialCardList = new Section( {
   renderer: item => {
     const card = createCard(item)
-    const cardElement = card.renderCard()
-    initialCardList.addItem(cardElement)
+    initialCardList.addItem(card)
   } }, elementsContainerSelector)
 
 
